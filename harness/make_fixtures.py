@@ -37,6 +37,14 @@ def money(dollars: float, digits: int) -> str:
     return n(cents, digits)
 
 
+def pct_bp(pct: float, digits: int) -> str:
+    """Percentage stored with two implied decimals (e.g. 2.5 -> 00250)."""
+    # Same Decimal scaling as money() so rates like 0.1 don't pick up
+    # binary floating-point error before being scaled to an integer.
+    bp = int((Decimal(str(pct)) * 100).to_integral_value())
+    return n(bp, digits)
+
+
 # ----------------------------------------------------------------------------
 # DEALERREC - 80 bytes: id6 name30 region4 enrolled1 status1 filler38
 # ----------------------------------------------------------------------------
@@ -54,7 +62,7 @@ def program(pid, desc, ptype, flat, pct, start, end, payee, region,
             stackable, req_prior, maxinc):
     rec = (
         s(pid, 6) + s(desc, 30) + s(ptype, 4)
-        + money(flat, 9) + n(round(pct * 100), 5)
+        + money(flat, 9) + pct_bp(pct, 5)
         + n(start, 8) + n(end, 8)
         + s(payee, 1) + s(region, 4) + s(stackable, 1) + s(req_prior, 1)
         + money(maxinc, 9) + s("", 14)
