@@ -35,6 +35,7 @@ FIELDS = [
 def parse(path):
     records = {}
     order = []
+    collisions = []
     for raw in Path(path).read_text().splitlines():
         if not raw.strip():
             continue
@@ -44,19 +45,30 @@ def parse(path):
         # a claim id can appear twice (e.g. forward + reversal); disambiguate
         # by status so both legs are compared independently.
         key = f"{key}/{rec['status'].strip()}"
+        if key in records:
+            # two records share claim-id AND status: the key no longer
+            # identifies a unique row, so a silent overwrite would mask a
+            # real difference. Surface it instead of dropping a record.
+            collisions.append(key)
         records[key] = rec
         order.append(key)
-    return records, order
+    return records, order, collisions
 
 
 def main(argv):
     if len(argv) != 3:
         print(__doc__)
         return 2
-    expected, exp_order = parse(argv[1])
-    actual, _ = parse(argv[2])
+    expected, exp_order, exp_dups = parse(argv[1])
+    actual, _, act_dups = parse(argv[2])
 
     mismatches = 0
+
+    for label, dups in (("expected", exp_dups), ("actual", act_dups)):
+        for key in dups:
+            print(f"COLLISION in {label}: duplicate claim-id/status {key} "
+                  f"(record dropped — comparison would be unreliable)")
+            mismatches += 1
 
     only_expected = [k for k in exp_order if k not in actual]
     only_actual = [k for k in actual if k not in expected]
