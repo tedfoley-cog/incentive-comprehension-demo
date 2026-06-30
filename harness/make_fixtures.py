@@ -8,6 +8,7 @@ fixtures are generated deterministically. Re-run this script to regenerate
 testdata/input/*.dat; the golden payout register is produced by running the
 batch (see run_legacy.sh) and checked in under testdata/expected.
 """
+from decimal import Decimal
 from pathlib import Path
 
 INPUT_DIR = Path(__file__).resolve().parent.parent / "testdata" / "input"
@@ -30,7 +31,10 @@ def n(value: int, width: int) -> str:
 
 def money(dollars: float, digits: int) -> str:
     """PIC 9(n)V99 with the implied decimal dropped (cents, zero padded)."""
-    return n(round(dollars * 100), digits)
+    # Convert via Decimal(str(...)) so amounts like 0.10 don't pick up binary
+    # floating-point error before being scaled to integer cents.
+    cents = int((Decimal(str(dollars)) * 100).to_integral_value())
+    return n(cents, digits)
 
 
 # ----------------------------------------------------------------------------
