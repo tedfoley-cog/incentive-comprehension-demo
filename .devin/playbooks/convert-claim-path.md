@@ -10,11 +10,10 @@ like the system it replaces. In this session you convert exactly one vertical
 slice — the **eligibility + pricing decision for a single claim** — and prove
 parity. Write everything into `modernized/`.
 
-> Confirm the target stack with the team before generating code. The proposed
-> default is **Java 21 + Spring Boot 3** exposing a synchronous REST endpoint,
-> chosen to align with the in-progress Struts → Spring MVC migration and the
-> batch → synchronous redesign the OEM is after. If they prefer a different
-> stack, adapt.
+> Target stack is **Java 21 + Spring Boot 3** exposing a synchronous REST
+> endpoint (confirmed with the team), chosen to align with the in-progress
+> Struts → Spring MVC migration and the batch → synchronous redesign the OEM
+> is after.
 
 ---
 

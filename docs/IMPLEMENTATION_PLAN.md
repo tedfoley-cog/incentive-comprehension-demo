@@ -113,7 +113,7 @@ lint the harness Python with `ruff`. Green check proves the legacy oracle is rep
 
 ## 9. Risks / unknowns
 
-- Modern target framework is a **guess** (Java 21 / Spring Boot 3). Flagged for user confirmation.
+- Modern target framework is **Java 21 / Spring Boot 3** (confirmed with the team).
 - DB2 SQL PL stored procs are not executed (no DB2 on the VM); they are reference artifacts only.
 - File count exceeds the default cap (intentional; see §4).
 - Real Ford validation depends on connectivity to their environment (per both briefs) — the demo's

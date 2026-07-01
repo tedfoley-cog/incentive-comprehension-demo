@@ -56,8 +56,8 @@ python3 harness/compare.py testdata/expected/payout.dat build/out/payout.dat   #
 During the conversion slice, point the modern service's output register at `compare.py` the same way;
 a clean `EQUIVALENT` is the proof, any `DIFF` line is a concrete claim-level discrepancy to explain.
 
-## Open item to confirm with the team
+## Modern target stack (confirmed)
 
-The modern target stack — **Java 21 + Spring Boot 3**, synchronous REST — is a *proposal*, chosen to
-align with the in-progress Struts → Spring MVC migration and the batch → synchronous redesign. Confirm
-before the conversion slice; the `convert-claim-path.md` playbook flags it too.
+The modern target stack is **Java 21 + Spring Boot 3**, synchronous REST — confirmed with the team,
+chosen to align with the in-progress Struts → Spring MVC migration and the batch → synchronous redesign.
+The `convert-claim-path.md` playbook targets this stack for the conversion slice.
