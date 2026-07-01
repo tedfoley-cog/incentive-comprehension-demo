@@ -130,14 +130,15 @@ loyalty programme design.
 
 | Status | Count | Net amount | GL impact |
 |--------|-------|-----------|-----------|
-| PAID | 6 | +$15,550.00 | Credit to expense |
+| PAID | 6 | +$15,050.00 | Credit to expense |
 | RVSD | 1 | -$750.00 | Debit (recovery) |
-| HOLD | 6 | $0 | No GL entry (pending adjudication) |
+| HOLD | 8 | $0 | No GL entry (pending adjudication) |
 | REJ | 2 | $0 | No GL entry (structurally invalid; EDIT failures only) |
 
 Computed from harness output (rejections never reach pricing, hence zero):
-- PAID total: $750 + $500 + $500 + $1300 + $2000 + $10000 = $15,050
+- PAID total: $750 + $500 + $500 + $1,300 + $2,000 + $10,000 = $15,050
 - RVSD total: -$750
+- Total claims: 6 PAID + 8 HOLD + 1 RVSD + 2 REJ = 17
 
 ---
 

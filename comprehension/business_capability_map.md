@@ -21,8 +21,9 @@ as fallback).
 ### Call / Job graph at a glance
 
 ```
-Scheduler: INCFEED -> INCDAILY -> INCGLFD -> INCREP
-                                          \-> INCMTH (month-end)
+Scheduler: INCFEED -> INCDAILY -+-> INCGLFD (ON RC INCDAILY EQ 0)
+                               |       \-> INCMTH (RUNAFTER INCGLFD AND ON LASTWORKDAY)
+                               +-> INCREP  (payout + exception reports)
 
 INCDAILY.jcl STEP010 (PGM=INCMAIN):
   INCMAIN
