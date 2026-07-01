@@ -15,13 +15,13 @@ SME → reimagine one slice with proof of parity.**
 
 | OEM ask | Fulfilled by |
 |---------|--------------|
-| "Start with DeepWiki" | Phase 0 of the comprehension playbook — index the repo first. |
+| "Start with DeepWiki" | Phase 0 of the `comprehend-incentive-platform` skill — index the repo first. |
 | Business-level understanding (not a code dump) | `comprehension/business_capability_map.md`. |
 | End-to-end process flow a business stakeholder can follow | `comprehension/claim_trace.md` (the OEM's #1 gap). |
 | Logic connected across systems | `comprehension/cross_artifact_linkage.md` (COBOL ↔ DB2 ↔ control card). |
 | Persona-based views | `comprehension/personas/{dealer_operations,compliance,finance}.md`. |
 | Human-in-the-loop validation | `comprehension/validation_log.md` — SME confirms/challenges, Devin reconciles. |
-| Reimagine, not lift-and-shift | `convert-claim-path.md` + `modernized/` — rules extracted to a typed domain model. |
+| Reimagine, not lift-and-shift | `convert-claim-path` skill + `modernized/` — rules extracted to a typed domain model. |
 | Feedback loop / known I/O validation | `harness/` GnuCOBOL oracle + `compare.py` field-by-field equivalence. |
 
 ## Planted "gotchas" to surface during comprehension
@@ -60,4 +60,4 @@ a clean `EQUIVALENT` is the proof, any `DIFF` line is a concrete claim-level dis
 
 The modern target stack is **Java 21 + Spring Boot 3**, synchronous REST — confirmed with the team,
 chosen to align with the in-progress Struts → Spring MVC migration and the batch → synchronous redesign.
-The `convert-claim-path.md` playbook targets this stack for the conversion slice.
+The `convert-claim-path` skill targets this stack for the conversion slice.

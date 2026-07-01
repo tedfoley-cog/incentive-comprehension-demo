@@ -20,7 +20,7 @@ one vertical slice into a modern service — proving behavioural parity against 
 ## What Devin does live
 
 Nothing under `comprehension/` or `modernized/` is pre-written — Devin produces it during the demo,
-driven by the two playbooks in `.devin/playbooks/`. Devin indexes the estate with **DeepWiki**, reads
+driven by the two skills in `.agents/skills/`. Devin indexes the estate with **DeepWiki**, reads
 the actual `PROCEDURE DIVISION` logic (not header comments) to build a top-down **business-capability
 map**, traces a single claim across COBOL/JCL/DB2, documents **duplicated rules that have drifted**
 across code and database, writes **persona views** for dealer-operations / compliance / finance, runs
@@ -30,11 +30,11 @@ against the legacy batch.
 
 ## How the demo runs
 
-1. The presenter triggers [`.devin/playbooks/comprehend-incentive-platform.md`](.devin/playbooks/comprehend-incentive-platform.md)
+1. The presenter invokes the [`comprehend-incentive-platform`](.agents/skills/comprehend-incentive-platform/SKILL.md) skill
    ("start with DeepWiki"). Devin works through Phases 0–5 and fills `comprehension/`.
 2. The presenter (as SME) challenges findings; Devin reconciles them against the source and the
    running harness.
-3. The presenter triggers [`.devin/playbooks/convert-claim-path.md`](.devin/playbooks/convert-claim-path.md).
+3. The presenter invokes the [`convert-claim-path`](.agents/skills/convert-claim-path/SKILL.md) skill.
    Devin reimagines one slice into `modernized/` and proves equivalence.
 
 The legacy batch is genuinely runnable — it is the validation **oracle**:
@@ -67,7 +67,7 @@ testdata/        input/ fixtures (17 claims, 5 dealers, 6 programs) + expected/ 
 harness/         build.sh, run_legacy.sh, make_fixtures.py, compare.py (the GnuCOBOL oracle)
 comprehension/   EMPTY at start — Devin fills live (capability map, claim trace, linkage, personas)
 modernized/      EMPTY at start — Devin fills live (Spring Boot slice + equivalence)
-.devin/playbooks/    comprehend-incentive-platform.md, convert-claim-path.md
+.agents/skills/   comprehend-incentive-platform/, convert-claim-path/ (skills Devin runs live)
 ```
 
 ## Key concepts

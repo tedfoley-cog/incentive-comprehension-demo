@@ -2,14 +2,14 @@
 
 This directory is **intentionally empty** in the starting state. It is the
 output target for the conversion slice that Devin builds **live** during the
-demo (driven by [`.devin/playbooks/convert-claim-path.md`](../.devin/playbooks/convert-claim-path.md)).
+demo (driven by the [`convert-claim-path`](../.agents/skills/convert-claim-path/SKILL.md) skill).
 
 The demo deliberately does **not** lift-and-shift the COBOL. Instead Devin
 reimagines one vertical slice — the **eligibility + pricing path for a single
 claim** — as a modern service, and proves behavioural parity against the
 legacy batch using the equivalence harness.
 
-When the playbook runs, Devin produces:
+When the skill runs, Devin produces:
 
 | Path | What it contains |
 |------|------------------|

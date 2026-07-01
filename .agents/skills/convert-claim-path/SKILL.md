@@ -1,8 +1,12 @@
+---
+name: convert-claim-path
+description: Reimagine one vertical slice (eligibility + pricing for a single claim) of the legacy incentive platform as a Java 21 + Spring Boot 3 service and prove field-for-field parity against the GnuCOBOL oracle. Use after the comprehend-incentive-platform skill has run and the SME has confirmed the findings.
+---
+
 # Convert one claim path (reimagine, don't transliterate)
 
-Prerequisite: the comprehension pass
-(`.devin/playbooks/comprehend-incentive-platform.md`) has run and the SME has
-confirmed the findings in `comprehension/`.
+Prerequisite: the comprehension pass (the `comprehend-incentive-platform`
+skill) has run and the SME has confirmed the findings in `comprehension/`.
 
 The OEM does not want a line-for-line COBOL → Java port. They want to see a
 **slice** of what the reimagined platform looks like, with proof it behaves

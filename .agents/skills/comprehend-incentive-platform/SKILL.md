@@ -1,3 +1,8 @@
+---
+name: comprehend-incentive-platform
+description: Produce a business-readable comprehension of the legacy dealer-incentive claims platform (COBOL/JCL/DB2 + Struts→Spring) and validate it with an SME. Use when comprehending, mapping, tracing, or documenting the legacy estate before modernization.
+---
+
 # Comprehend the Incentive Platform
 
 You are analyzing a poorly-documented dealer-incentive claims platform for a
@@ -147,4 +152,4 @@ The log should clearly show which findings are SME-confirmed vs open.
 - [ ] `comprehension/validation_log.md`
 
 When this is done and SME-confirmed, the team can decide which slice to
-reimagine first — see `.devin/playbooks/convert-claim-path.md`.
+reimagine first — see the `convert-claim-path` skill.

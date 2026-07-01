@@ -62,7 +62,7 @@ harness/
   compare.py                    # field-by-field equivalence: legacy vs modern
 comprehension/                  # EMPTY (Devin fills live): business_capability_map, claim trace, personas, validation log
 modernized/                     # EMPTY (Devin fills live): Spring Boot eligibility-incentive-service
-.devin/playbooks/               # comprehend-incentive-platform.md, convert-claim-path.md
+.agents/skills/                 # comprehend-incentive-platform/, convert-claim-path/
 .github/workflows/ci.yml
 README.md  DEMO_NOTES.md
 ```

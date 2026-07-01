@@ -2,9 +2,9 @@
 
 This directory is **intentionally empty** in the starting state. It is the
 output target for the comprehension pass that Devin runs **live** during the
-demo (driven by [`.devin/playbooks/comprehend-incentive-platform.md`](../.devin/playbooks/comprehend-incentive-platform.md)).
+demo (driven by the [`comprehend-incentive-platform`](../.agents/skills/comprehend-incentive-platform/SKILL.md) skill).
 
-When the playbook runs, Devin populates:
+When the skill runs, Devin populates:
 
 | File | What it contains |
 |------|------------------|
