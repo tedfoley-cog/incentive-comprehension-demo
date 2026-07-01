@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE struts-config PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<!--
+  struts-config.xml - LEGACY ONLINE CLAIM-ENTRY ACTION MAPPINGS
+
+  This is the original Struts 1.x wiring for the dealer claim-entry
+  screen. It calls SP_ELIGIBILITY for instant feedback before a claim is
+  written. The team is mid-migration to Spring MVC; the equivalent
+  controller lives in ../frontend-spring/ClaimController.java. Both must
+  be reconciled during the reimagining.
+-->
+<struts-config>
+    <form-beans>
+        <form-bean name="claimForm"
+                   type="com.oem.incentive.web.ClaimForm"/>
+    </form-beans>
+
+    <action-mappings>
+        <action path="/claimEntry"
+                type="com.oem.incentive.web.ClaimEntryAction"
+                name="claimForm"
+                scope="request"
+                validate="true"
+                input="/jsp/claimEntry.jsp">
+            <forward name="eligible"   path="/jsp/claimConfirm.jsp"/>
+            <forward name="ineligible" path="/jsp/claimReject.jsp"/>
+            <forward name="failure"    path="/jsp/error.jsp"/>
+        </action>
+    </action-mappings>
+
+    <message-resources parameter="com.oem.incentive.web.MessageResources"/>
+</struts-config>

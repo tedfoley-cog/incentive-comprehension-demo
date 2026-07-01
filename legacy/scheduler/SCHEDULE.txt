@@ -1,0 +1,42 @@
+#=====================================================================#
+# SCHEDULE.txt - BATCH JOB-SCHEDULER METADATA (EXPORT)                #
+#                                                                     #
+# Simplified export of the enterprise scheduler definition for the    #
+# INCENTIVE application group. Each JOB stanza lists its predecessor  #
+# dependencies (RUNAFTER), trigger condition (ON), and the dataset    #
+# it makes available to successors (OUT). This is the batch-flow      #
+# metadata comprehension uses to reconstruct the end-to-end pipeline  #
+# without reading every line of JCL.                                  #
+#=====================================================================#
+
+APPLGROUP INCENTIVE
+  CALENDAR  WORKDAYS
+  OWNER     OEMBATCH
+
+JOB INCFEED
+  DESC      Receive + stage daily dealer claim feed
+  ON        FILEARRIVE OEM.INCENT.INBOUND.CLAIMS
+  OUT       OEM.INCENT.CLAIMS(+1)
+
+JOB INCDAILY
+  DESC      Edit, adjudicate and price all claims
+  RUNAFTER  INCFEED
+  JCL       INCDAILY
+  OUT       OEM.INCENT.PAYOUT(+1)
+
+JOB INCGLFD
+  DESC      Build general-ledger debit/credit feed
+  RUNAFTER  INCDAILY
+  ON        RC INCDAILY EQ 0
+  JCL       INCGLFD
+  OUT       OEM.INCENT.GLFEED(+1)
+
+JOB INCREP
+  DESC      Distribute payout + exception reports
+  RUNAFTER  INCDAILY
+  OUT       SYSOUT
+
+JOB INCMTH
+  DESC      Month-end reconciliation (INCPROC CYCLE=MONTHLY)
+  RUNAFTER  INCGLFD
+  ON        LASTWORKDAY

@@ -1,0 +1,12 @@
+*---------------------------------------------------------------------*
+* INCPARM - RUNTIME CONTROL CARD (READ VIA //INCPARM DD)              *
+*                                                                     *
+* COLUMNS 1-2 ARE A KEYWORD TAG; COLUMNS 4-72 ARE THE VALUE. A '*' IN *
+* COLUMN 1 MARKS A COMMENT. THESE OVERRIDES MIRROR CONSTANTS THAT     *
+* ALSO LIVE IN COPYBOOK INCCONST AND IN DB2 TABLE PARM - THE TRIPLE   *
+* DUPLICATION COMPREHENSION MUST RECONCILE.                           *
+*---------------------------------------------------------------------*
+GC 0010000.00      GLOBAL PAYOUT CAP (DOLLARS) - SEE WC-GLOBAL-PAYOUT-CAP
+LB 0000500.00      LOYALTY STACK BONUS        - SEE WC-LOYALTY-BONUS
+DR Y               DUPLICATE-CLAIM HOLD (Y/N)
+RC NE WST MW STH   VALID DEALER REGION CODES

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Incentive Platform Comprehension &mdash; Devin Workflow</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: #f5f7fa;
+      color: #1e293b;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    header {
+      width: 100%;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%);
+      color: #fff;
+      text-align: center;
+      padding: 2rem 1rem 1.75rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.15);
+    }
+    header h1 { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700; }
+    header p { margin-top: .5rem; font-size: .95rem; color: #94a3b8; }
+
+    main {
+      flex: 1; width: 100%; max-width: 1500px;
+      padding: 2rem 1rem; display: flex; justify-content: center;
+    }
+    #flowchart { width: 100%; overflow-x: auto; }
+    .mermaid svg { margin: 0 auto; display: block; }
+
+    .legend { width: 100%; max-width: 1500px; padding: 0 1rem 2.5rem; }
+    .legend-inner {
+      background: #fff; border: 1px solid #e2e8f0; border-radius: 12px;
+      padding: 1.25rem 1.75rem; display: flex; flex-wrap: wrap;
+      gap: 1.25rem; align-items: center; box-shadow: 0 1px 3px rgba(0,0,0,.06);
+    }
+    .legend-title {
+      font-weight: 600; font-size: .85rem; text-transform: uppercase;
+      letter-spacing: .05em; color: #64748b; margin-right: .5rem;
+    }
+    .legend-item {
+      display: flex; align-items: center; gap: .45rem;
+      font-size: .85rem; color: #334155;
+    }
+    .legend-swatch {
+      width: 16px; height: 16px; border-radius: 4px; flex-shrink: 0;
+    }
+    .phase-notes {
+      width: 100%; max-width: 1500px; padding: 0 1rem 3rem;
+    }
+    .phase-notes table {
+      width: 100%; border-collapse: collapse; background: #fff;
+      border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden;
+      font-size: .9rem;
+    }
+    .phase-notes th, .phase-notes td {
+      text-align: left; padding: .7rem 1rem; border-bottom: 1px solid #eef2f7;
+      vertical-align: top;
+    }
+    .phase-notes th { background: #f8fafc; color: #475569; font-weight: 600; }
+    .phase-notes tr:last-child td { border-bottom: none; }
+    .phase-notes code {
+      background: #f1f5f9; padding: .1rem .35rem; border-radius: 4px;
+      font-size: .82rem;
+    }
+    footer {
+      width: 100%; text-align: center; padding: 1rem; font-size: .8rem;
+      color: #94a3b8; border-top: 1px solid #e2e8f0; background: #fff;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Incentive Platform Comprehension &mdash; Devin Workflow</h1>
+    <p>From an undocumented COBOL / JCL / DB2 estate to a validated,
+       business-readable understanding &mdash; and one reimagined slice</p>
+  </header>
+
+  <main>
+    <div id="flowchart">
+      <pre class="mermaid">
+%%{init: {
+  'theme': 'base',
+  'flowchart': { 'htmlLabels': false, 'curve': 'basis' },
+  'themeVariables': {
+    'primaryColor':      '#dbeafe',
+    'primaryTextColor':  '#1e293b',
+    'primaryBorderColor':'#3b82f6',
+    'lineColor':         '#64748b',
+    'fontSize':          '14px'
+  }
+}}%%
+flowchart TD
+  TRIG[Presenter runs comprehension playbook]
+  DW[Devin indexes repo with DeepWiki]
+
+  subgraph COMP [Comprehension pass]
+    direction TB
+    CAP[Business capability map]
+    TRACE[End-to-end claim trace]
+    LINK[Cross-artifact linkage]
+    PERS[Persona views]
+    CAP --> TRACE --> LINK --> PERS
+  end
+
+  ORACLE[GnuCOBOL oracle runs batch]
+  SME{SME confirms or challenges}
+  FIX[Devin reconciles against source]
+
+  subgraph CONV [Conversion slice]
+    direction TB
+    RULES[Extract rules to domain model]
+    SVC[Build Spring Boot endpoint]
+    EQ[Equivalence vs legacy register]
+    RULES --> SVC --> EQ
+  end
+
+  OUT[Validated comprehension and reimagining]
+
+  TRIG --> DW --> CAP
+  TRACE --> ORACLE
+  PERS --> SME
+  SME -- challenge --> FIX
+  FIX --> CAP
+  SME -- confirm --> RULES
+  ORACLE --> EQ
+  EQ --> OUT
+
+  classDef trigger fill:#d1fae5,stroke:#059669,stroke-width:2px,color:#064e3b;
+  classDef devin   fill:#e0e7ff,stroke:#6366f1,stroke-width:2px,color:#312e81;
+  classDef phase   fill:#dbeafe,stroke:#3b82f6,stroke-width:1.5px,color:#1e3a8a;
+  classDef oracle  fill:#f0f9ff,stroke:#0ea5e9,stroke-width:2px,color:#0c4a6e;
+  classDef human   fill:#fef9c3,stroke:#eab308,stroke-width:2px,color:#713f12;
+  classDef out     fill:#fef3c7,stroke:#f59e0b,stroke-width:2px,color:#78350f;
+
+  class TRIG trigger;
+  class DW,FIX devin;
+  class CAP,TRACE,LINK,PERS,RULES,SVC,EQ phase;
+  class ORACLE oracle;
+  class SME human;
+  class OUT out;
+      </pre>
+    </div>
+  </main>
+
+  <div class="legend">
+    <div class="legend-inner">
+      <span class="legend-title">Legend</span>
+      <span class="legend-item"><span class="legend-swatch"
+        style="background:#d1fae5;border:1px solid #059669"></span>Trigger</span>
+      <span class="legend-item"><span class="legend-swatch"
+        style="background:#e0e7ff;border:1px solid #6366f1"></span>Devin action</span>
+      <span class="legend-item"><span class="legend-swatch"
+        style="background:#dbeafe;border:1px solid #3b82f6"></span>Comprehension / conversion step</span>
+      <span class="legend-item"><span class="legend-swatch"
+        style="background:#f0f9ff;border:1px solid #0ea5e9"></span>Runnable oracle</span>
+      <span class="legend-item"><span class="legend-swatch"
+        style="background:#fef9c3;border:1px solid #eab308"></span>Human-in-the-loop</span>
+      <span class="legend-item"><span class="legend-swatch"
+        style="background:#fef3c7;border:1px solid #f59e0b"></span>Output</span>
+    </div>
+  </div>
+
+  <div class="phase-notes">
+    <table>
+      <thead>
+        <tr><th>Step</th><th>Maps to OEM ask</th><th>Artifact produced</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>DeepWiki index</td><td>"start with DeepWiki"</td>
+          <td>Repo-wide index + inventory</td></tr>
+        <tr><td>Business capability map</td><td>business-level understanding</td>
+          <td><code>comprehension/business_capability_map.md</code></td></tr>
+        <tr><td>End-to-end claim trace</td><td>trace a claim across systems</td>
+          <td><code>comprehension/claim_trace.md</code></td></tr>
+        <tr><td>Cross-artifact linkage</td><td>logic connected across systems</td>
+          <td><code>comprehension/cross_artifact_linkage.md</code></td></tr>
+        <tr><td>Persona views</td><td>persona-based stakeholder views</td>
+          <td><code>comprehension/personas/</code></td></tr>
+        <tr><td>SME validation loop</td><td>human-in-the-loop validation</td>
+          <td><code>comprehension/validation_log.md</code></td></tr>
+        <tr><td>Conversion slice + equivalence</td><td>reimagine, not lift-and-shift</td>
+          <td><code>modernized/</code> + clean <code>compare.py</code> run</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <footer>Initial-state scaffold &mdash; the comprehension and conversion
+    artifacts are produced live by Devin during the session.</footer>
+
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'base',
+      flowchart: { htmlLabels: false, curve: 'basis' }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+name: legacy-oracle
+
+# Proves the legacy COBOL batch is reproducible: it compiles, runs over the
+# fixtures, and reproduces the golden payout register byte-for-byte. This is the
+# equivalence oracle any modern rewrite is checked against.
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build-run-compare:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install GnuCOBOL
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gnucobol
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install ruff
+        run: pip install ruff
+
+      - name: Lint harness
+        run: ruff check harness/
+
+      - name: Build legacy batch (GnuCOBOL)
+        run: ./harness/build.sh
+
+      - name: Fixtures are deterministic
+        run: |
+          python3 harness/make_fixtures.py
+          git diff --exit-code testdata/input/
+
+      - name: Run legacy batch
+        run: ./harness/run_legacy.sh
+
+      - name: Equivalence vs golden register
+        run: python3 harness/compare.py testdata/expected/payout.dat build/out/payout.dat
